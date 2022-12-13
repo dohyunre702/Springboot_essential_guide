@@ -1,5 +1,6 @@
 package com.example.hello.controller;
 
+import com.example.hello.dto.MemberDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -45,7 +46,7 @@ public class GetController {
 
     //3-2. @RequestParam(쿼리에 어떤 값이 들어올지 모르는 경우, map 객체 활용 가능)
     //http://localhost:8080/api/v1/get-api/request2?key1=value1&key2=value2
-    @GetMapping("request2")
+    @GetMapping("/request2")
     public String getRequestParam2(@RequestParam Map<String, String> param) {
         StringBuilder sb = new StringBuilder();
 
@@ -54,6 +55,14 @@ public class GetController {
         });
 
         return sb.toString();
+    }
+
+    //4. DTO 객체를 활용한 GET메서드 구현
+    //http://localhost:8080/api/v1/get-api/request3?name=value1&email=value2&organization=value3
+    @GetMapping("/request3")
+    public String getRequestParam3(MemberDto memberDto) {
+        return memberDto.toString();
+        //= return memberDto.getName() + " " + memberDto.getEmail() + " " + memberDto.getOrganization();
     }
 
 }
